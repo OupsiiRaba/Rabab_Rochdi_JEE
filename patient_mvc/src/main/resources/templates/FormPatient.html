@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      >
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ajout d'un patient</title>
+
+        <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+        <!-- CSS only -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
+        <!-- JavaScript Bundle with Popper -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+<div layout:fragment="content1">
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">Nouveau Patient</div>
+            <div class="card-body">
+                <form th:action="@{/save}" method="post">
+                    <div class="form-group mt-2">
+                        <label class="control-label">Nom : </label>
+                        <input class="form-control" type="text" name="nom" th:required="required"
+                        th:value="${patient.nom}">
+                        <span class="text-danger" th:errors="${patient.nom}"></span>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label class="control-label">Date de naissance : </label>
+                        <input class="form-control" type="date" name="dateNaissance" th:required="required"
+                               th:value="${patient.dateNaissance}">
+                        <span class="text-danger" th:errors="${patient.dateNaissance}"></span>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label class="control-label">Malade : </label><br>
+                        <input type="radio" id="true" name="malade" value="true" th:value="${patient.malade}">
+                        <label for="true">Oui</label><br>
+                        <input type="radio" id="false" name="malade" value="false" th:value="${patient.malade}">
+                        <label for="true">Non</label><br>
+                        <span class="text-danger" th:errors="${patient.malade}"></span>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label class="control-label">Score : </label>
+                        <input class="form-control" type="number" name="score" th:required="required"
+                               th:value="${patient.score}">
+                        <span class="text-danger" th:errors="${patient.score}"></span>
+                    </div>
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-outline-primary"><i class="fas fa-save"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
