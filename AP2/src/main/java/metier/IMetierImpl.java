@@ -3,6 +3,7 @@ package metier;
 import dao.IDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 //instanciation
 @Component("metier")
 public class IMetierImpl implements IMetier {
@@ -24,11 +25,12 @@ public class IMetierImpl implements IMetier {
     //va geerer une exception null pointer
     @Override
     public double Calcul() {
-        double tmp= iDao.getData();
-        double res = tmp*540/Math.cos(tmp*Math.PI);
+        double tmp = iDao.getData();
+        double res = tmp * 540 / Math.cos(tmp * Math.PI);
 
         return res;
     }
+
     //permet d injecter dans la variable IDao  un objet d une classe qui implemente l interface IDao
     public void setiDao(IDao iDao) {
         this.iDao = iDao;

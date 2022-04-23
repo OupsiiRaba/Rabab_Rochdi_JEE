@@ -14,7 +14,7 @@ import java.util.UUID;
 
 /**
  * coucher service pour la sécurité
- * */
+ */
 
 @Service
 @Slf4j
@@ -27,7 +27,7 @@ public class SecurityServiceImpl implements SecurityService {
 
     @Override
     public AppUser saveNewUser(String username, String password, String rePwd) {
-        if (!password.equals(rePwd)) throw new  RuntimeException("Password not match");
+        if (!password.equals(rePwd)) throw new RuntimeException("Password not match");
         String hashedPWD = passwordEncoder.encode(password);
         AppUser appUser = new AppUser();
         appUser.setUserId(UUID.randomUUID().toString());
@@ -42,7 +42,7 @@ public class SecurityServiceImpl implements SecurityService {
     public AppRole saveNewRole(String roleName, String description) {
         AppRole appRole = appRoleRepository.findByRoleName(roleName);
         if (appRole != null)
-            throw new RuntimeException("Role "+roleName+" already exist!!!");
+            throw new RuntimeException("Role " + roleName + " already exist!!!");
         appRole = new AppRole();
         appRole.setRoleName(roleName);
         appRole.setDescription(description);

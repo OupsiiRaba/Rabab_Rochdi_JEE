@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="template1"
-      >
+>
 <head>
     <meta charset="UTF-8">
     <title>Gestion des patients</title>
@@ -22,7 +22,8 @@
                 </form>
                 <ul class="nav nav-pills">
                     <li>
-                        <a class="btn btn-outline-primary mt-4" th:href="@{/admin/formPatients}">Ajouter un nouveau patient <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                        <a class="btn btn-outline-primary mt-4" th:href="@{/admin/formPatients}">Ajouter un nouveau
+                            patient <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
                     </li>
                 </ul>
                 <table class="table">
@@ -44,14 +45,17 @@
                         <td th:text="${p.malade}"></td>
                         <td th:text="${p.score}"></td>
                         <td>
-                            <a sec:authorize="hasRole('ADMIN')" onclick="return confirm('Voulez-vous supprimer ce patient?')"
+                            <a sec:authorize="hasRole('ADMIN')"
+                               onclick="return confirm('Voulez-vous supprimer ce patient?')"
                                class="btn btn-outline-danger"
-                               th:href="@{/admin/delete(id=${p.id}, keyword=${keyword}, page=${currentPage})}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                               th:href="@{/admin/delete(id=${p.id}, keyword=${keyword}, page=${currentPage})}"><i
+                                    class="fa fa-trash" aria-hidden="true"></i></a>
                             <a sec:authorize="hasRole('ADMIN')" class="btn btn-outline-info"
                                th:href="@{/admin/editPatient(id=${p.id}, keyword=${keyword}, page=${currentPage})}">
                                 <i class="fa fa-pencil-square" aria-hidden="true"></i></a>
                             <a class="btn btn-outline-dark"
-                               th:href="@{/user/listPatient(id=${p.id}, keyword=${keyword}, page=${currentPage})}"><i class="fa fa-list-alt" aria-hidden="true"></i></a>
+                               th:href="@{/user/listPatient(id=${p.id}, keyword=${keyword}, page=${currentPage})}"><i
+                                    class="fa fa-list-alt" aria-hidden="true"></i></a>
                         </td>
                     </tr>
                     </tbody>
@@ -59,7 +63,9 @@
 
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
-                        <li class="page-item"><a class="page-link"  th:href="@{index(page=${currentPage}-1, keyword=${keyword})}">Previous</a></li>
+                        <li class="page-item"><a class="page-link"
+                                                 th:href="@{index(page=${currentPage}-1, keyword=${keyword})}">Previous</a>
+                        </li>
 
                         <li class="page-item" th:each="page,status:${pages}">
                             <a th:class="${status.index==currentPage?'active page-link':'page-link'}"
@@ -69,7 +75,9 @@
                             ></a>
                         </li>
 
-                        <li class="page-item"><a class="page-link" th:href="@{index(page=${currentPage}+1, keyword=${keyword})}">Next</a></li>
+                        <li class="page-item"><a class="page-link"
+                                                 th:href="@{index(page=${currentPage}+1, keyword=${keyword})}">Next</a>
+                        </li>
                     </ul>
                 </nav>
 

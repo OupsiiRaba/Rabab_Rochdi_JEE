@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+
 @XmlRootElement(name = "dependence")
 @XmlAccessorType(XmlAccessType.FIELD)
 class Dependence implements Serializable {

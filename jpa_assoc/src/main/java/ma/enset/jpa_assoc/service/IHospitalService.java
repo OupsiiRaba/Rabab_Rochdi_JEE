@@ -8,7 +8,10 @@ import ma.enset.jpa_assoc.entities.RendezVous;
 
 public interface IHospitalService {
     Patient savePatient(Patient patient);
+
     Medecin saveMedecin(Medecin medecin);
+
     RendezVous saveRendezVous(RendezVous rendezVous);
+
     Consultation saveConsultation(Consultation consultation);
 }

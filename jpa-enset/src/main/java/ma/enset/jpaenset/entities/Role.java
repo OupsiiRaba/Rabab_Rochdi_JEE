@@ -11,11 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data @NoArgsConstructor @AllArgsConstructor
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Role {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true,length = 20)
+    @Column(unique = true, length = 20)
     private String roleName;
     @ManyToMany(fetch = FetchType.EAGER)
     //@JoinTable(name = "USERS_ROLES",)

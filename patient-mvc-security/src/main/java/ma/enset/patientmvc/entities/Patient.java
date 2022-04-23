@@ -14,10 +14,12 @@ import java.util.Date;
 
 
 @Entity
-@Data @NoArgsConstructor
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class Patient {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotEmpty
     @Size(min = 3, max = 50)

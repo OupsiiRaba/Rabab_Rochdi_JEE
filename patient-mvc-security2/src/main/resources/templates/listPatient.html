@@ -35,7 +35,8 @@
                         <label th:text="${patient.score}"></label>
                     </div>
                     <div class="mt-4">
-                        <a class="btn btn-outline-primary" th:href="@{/user/index(id=${patient.id}, keyword=${keyword}, page=${page})}">
+                        <a class="btn btn-outline-primary"
+                           th:href="@{/user/index(id=${patient.id}, keyword=${keyword}, page=${page})}">
                             <i class="fas fa-arrow-alt-circle-left"></i>
                         </a>
                         <a sec:authorize="hasRole('ADMIN')" class="btn btn-outline-warning"

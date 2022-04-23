@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
     public void addRoleToUser(String username, String rolename) {
         User user = findUserByUserName(username);
         Role role = findRoleByRoleNAme(rolename);
-        if (user.getRoles() != null){
+        if (user.getRoles() != null) {
             user.getRoles().add(role);
             role.getUsers().add(user);
         }
@@ -56,10 +56,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User autheticate(String username, String password) {
         User user = userRepository.findByUsername(username);
-        if (user==null){
+        if (user == null) {
             throw new RuntimeException("BAd credentials");
         }
-        if(user.getPassword().equals(password)){
+        if (user.getPassword().equals(password)) {
             return user;
         }
         throw new RuntimeException("BAd credentials");

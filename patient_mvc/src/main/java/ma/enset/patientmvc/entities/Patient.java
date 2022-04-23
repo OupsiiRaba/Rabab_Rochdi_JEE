@@ -14,17 +14,19 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Data @NoArgsConstructor
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class Patient {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @Size(min = 3,max = 30,message = "La taille du nom doit etre entre 3 et 30 caractéres")
+    @Size(min = 3, max = 30, message = "La taille du nom doit etre entre 3 et 30 caractéres")
     private String nom;
     //@Temporal(TemporalType.DATE)
     @NotNull
-    @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date dateNaissance;
     private boolean malade;
     @NotNull

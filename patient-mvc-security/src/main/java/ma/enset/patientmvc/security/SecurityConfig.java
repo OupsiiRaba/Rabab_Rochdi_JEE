@@ -18,13 +18,14 @@ import javax.sql.DataSource;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         /* la stratégie comment spring sec va chercher les users*/
         //ici comment spring sec va chercher les users & roles
         //BDD pour chercher un user ou des users mémoire ou annuaire LDAP
         //pour ne pas encoder les pwd {noop} ==>.password("{noop}123")
-       // PasswordEncoder passwordEncoder = passwordEncoder();
+        // PasswordEncoder passwordEncoder = passwordEncoder();
         /*//mem auth
         String encodedPwd = passwordEncoder.encode("123");
         System.out.println(encodedPwd);
@@ -45,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         System.out.println(encodedPWD);
         auth.inMemoryAuthentication().withUser("user1").password(encodedPWD).roles("USER");
         auth.inMemoryAuthentication().withUser("rabab").password(passwordEncoder.encode("Azerty2020")).roles("USER");
-        auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder.encode("1234")).roles("USER","ADMIN");
+        auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder.encode("1234")).roles("USER", "ADMIN");
 
         auth.jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery("select username as principal, password as credentials,active from users where username = ?")
                 .authoritiesByUsernameQuery("select username as principal, role as users_roles from roles where username=?")
@@ -56,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //je demande à spring sec une formulaire d'auth
         /*pour une formulaire personnalisée
-        *http.formLogin().loginPage("/login"); */
+         *http.formLogin().loginPage("/login"); */
         http.formLogin();
         //ne nécessite pas une auth
         http.authorizeRequests().antMatchers("/").permitAll();
@@ -70,8 +71,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.exceptionHandling().accessDeniedPage("/403");
     }
 
-    @Bean //au démarrage crée moi un PasswordEncoder et tu le place dans context
-    PasswordEncoder passwordEncoder(){
+    @Bean
+        //au démarrage crée moi un PasswordEncoder et tu le place dans context
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

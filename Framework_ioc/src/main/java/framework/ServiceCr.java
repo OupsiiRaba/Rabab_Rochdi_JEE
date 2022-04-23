@@ -27,7 +27,7 @@ public class ServiceCr {
         this.object = object;
     }
 
-    public void createXML(Object object , Object dependence) throws JAXBException {
+    public void createXML(Object object, Object dependence) throws JAXBException {
         Beans beans = new Beans();
         Dependence dep = new Dependence();
         dep.setName(dependence.getClass().getName().split("\\.")[1].toLowerCase());
@@ -43,7 +43,7 @@ public class ServiceCr {
         beans.addBean(bean1);
         JAXBContext context = JAXBContext.newInstance(Beans.class);
         Marshaller marshaller = context.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         marshaller.marshal(beans, new File("config.xml"));
     }
 
@@ -58,24 +58,24 @@ public class ServiceCr {
 
         JAXBContext context = JAXBContext.newInstance(Beans.class);
         Marshaller marshaller = context.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         marshaller.marshal(beans, new File("config.xml"));
     }
 
-    public Object createObject(String object1,String object2) throws Exception {
+    public Object createObject(String object1, String object2) throws Exception {
         Class objectAA = Class.forName(object1);
         Class objectBB = Class.forName(object2);
 
         Object iObjectAA = objectAA.newInstance();
         Object iObjectBB = objectBB.newInstance();
 
-        Method meth=objectAA.getMethod("setDao",objectBB.getInterfaces()[0]);
-        meth.invoke(iObjectAA,iObjectBB);
-        createXML(iObjectAA,iObjectBB);
+        Method meth = objectAA.getMethod("setDao", objectBB.getInterfaces()[0]);
+        meth.invoke(iObjectAA, iObjectBB);
+        createXML(iObjectAA, iObjectBB);
         return iObjectAA;
     }
 
-    public List<Bean> readBeans () throws Exception {
+    public List<Bean> readBeans() throws Exception {
         JAXBContext context = JAXBContext.newInstance(Beans.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
         Beans beans = (Beans) unmarshaller.unmarshal(new File("config.xml"));
@@ -85,17 +85,17 @@ public class ServiceCr {
     public Object readXMLBean(String idClass) throws Exception {
         Object myObject = null;
         List<Bean> beans = readBeans();
-        for (Bean bean : beans){
-            if(idClass.equals(bean.getId().toLowerCase())){
+        for (Bean bean : beans) {
+            if (idClass.equals(bean.getId().toLowerCase())) {
                 myObject = Class.forName(bean.getClassName()).newInstance();
-                if(bean.getDependence()==null) {
+                if (bean.getDependence() == null) {
                     System.out.println(idClass + "     |      " + bean.getId().toLowerCase());
                     return myObject;
-                }else{
-                    for(Bean bean1: beans){
-                        if((bean.getDependence().getRef()).equals(bean1.getId())){
-                            Method meth = Class.forName(bean.getClassName()).getMethod("setDao",Class.forName(bean1.getClassName()).getInterfaces()[0]);
-                            meth.invoke(myObject,Class.forName(bean1.getClassName()).newInstance());
+                } else {
+                    for (Bean bean1 : beans) {
+                        if ((bean.getDependence().getRef()).equals(bean1.getId())) {
+                            Method meth = Class.forName(bean.getClassName()).getMethod("setDao", Class.forName(bean1.getClassName()).getInterfaces()[0]);
+                            meth.invoke(myObject, Class.forName(bean1.getClassName()).newInstance());
                         }
                     }
                 }

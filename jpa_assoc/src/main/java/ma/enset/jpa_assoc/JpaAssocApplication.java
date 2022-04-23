@@ -21,28 +21,29 @@ public class JpaAssocApplication {
     public static void main(String[] args) {
         SpringApplication.run(JpaAssocApplication.class, args);
     }
+
     @Bean
     CommandLineRunner start(IHospitalService hospitalService,
                             PatientRepository patientRepository,
                             RendezVousRepository rendezVousRepository,
                             ConsultationRepository consultationRepository,
-                            MedecinRepository medecinRepository){
+                            MedecinRepository medecinRepository) {
         return args -> {
             // Execution instanciation des objets dans la base de données
-                Stream.of("Rabab","wissale","yass")
-                    .forEach(name ->{
+            Stream.of("Rabab", "wissale", "yass")
+                    .forEach(name -> {
                         Patient patient = new Patient();
                         patient.setNom(name);
                         patient.setDateNaissance(new Date());
                         patient.setMalade(false);
                         hospitalService.savePatient(patient);
                     });
-            Stream.of("saly","mery","oumi")
-                    .forEach(name ->{
+            Stream.of("saly", "mery", "oumi")
+                    .forEach(name -> {
                         Medecin medecin = new Medecin();
                         medecin.setNom(name);
-                        medecin.setEmail(name+"@hospital.ma");
-                        medecin.setSpecialite(Math.random()>0.5?"Cardio":"chirurgie");
+                        medecin.setEmail(name + "@hospital.ma");
+                        medecin.setSpecialite(Math.random() > 0.5 ? "Cardio" : "chirurgie");
                         hospitalService.saveMedecin(medecin);
                     });
 

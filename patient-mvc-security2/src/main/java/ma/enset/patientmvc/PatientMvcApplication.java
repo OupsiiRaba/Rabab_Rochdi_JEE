@@ -18,37 +18,39 @@ public class PatientMvcApplication {
         SpringApplication.run(PatientMvcApplication.class, args);
     }
 
-    @Bean //au démarrage crée moi un PasswordEncoder et tu le place dans context
-    BCryptPasswordEncoder passwordEncoder(){
+    @Bean
+        //au démarrage crée moi un PasswordEncoder et tu le place dans context
+    BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     //@Bean
-    CommandLineRunner commandLineRunner(PatientRepository patientRepository){
+    CommandLineRunner commandLineRunner(PatientRepository patientRepository) {
         return args -> {
-            patientRepository.save(new Patient(null,"Rabab",new Date(),false,12));
-            patientRepository.save(new Patient(null,"wiswis",new Date(),true,102));
+            patientRepository.save(new Patient(null, "Rabab", new Date(), false, 12));
+            patientRepository.save(new Patient(null, "wiswis", new Date(), true, 102));
 
-            patientRepository.findAll().forEach(p->{
+            patientRepository.findAll().forEach(p -> {
                 System.out.println(p.getNom());
             });
 
         };
     }
+
     //@Bean
-    CommandLineRunner saveUsers(SecurityService securityService){
-        return args ->{
-            securityService.saveNewUser("rabab","1234","1234");
-            securityService.saveNewUser("yassine","1234","1234");
-            securityService.saveNewUser("salma","1234","1234");
+    CommandLineRunner saveUsers(SecurityService securityService) {
+        return args -> {
+            securityService.saveNewUser("rabab", "1234", "1234");
+            securityService.saveNewUser("yassine", "1234", "1234");
+            securityService.saveNewUser("salma", "1234", "1234");
 
-            securityService.saveNewRole("USER","");
-            securityService.saveNewRole("ADMIN","");
+            securityService.saveNewRole("USER", "");
+            securityService.saveNewRole("ADMIN", "");
 
-            securityService.addRoleToUser("rabab","USER");
-            securityService.addRoleToUser("rabab","ADMIN");
-            securityService.addRoleToUser("salma","USER");
-            securityService.addRoleToUser("yassine","USER");
+            securityService.addRoleToUser("rabab", "USER");
+            securityService.addRoleToUser("rabab", "ADMIN");
+            securityService.addRoleToUser("salma", "USER");
+            securityService.addRoleToUser("yassine", "USER");
 
 
         };

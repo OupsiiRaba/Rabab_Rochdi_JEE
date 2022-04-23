@@ -18,49 +18,50 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@Data @AllArgsConstructor
+@Data
+@AllArgsConstructor
 public class PatientController {
     private PatientRepository patientRepository;
 
     @GetMapping(path = "/index")
     public String patients(Model model,
                            //param d'url
-                           @RequestParam(name="page", defaultValue = "0") int page,
-                           @RequestParam(name="size", defaultValue = "5") int size,
-                           @RequestParam(name="keyword", defaultValue = "") String keyword){
-        Page<Patient> pagePatients = patientRepository.findByNomContains(keyword,PageRequest.of(page,size));
-        model.addAttribute("listPatients",pagePatients.getContent());
-        model.addAttribute("pages",new int[pagePatients.getTotalPages()]);
-        model.addAttribute("currentPage",page);
-        model.addAttribute("keyword",keyword);
+                           @RequestParam(name = "page", defaultValue = "0") int page,
+                           @RequestParam(name = "size", defaultValue = "5") int size,
+                           @RequestParam(name = "keyword", defaultValue = "") String keyword) {
+        Page<Patient> pagePatients = patientRepository.findByNomContains(keyword, PageRequest.of(page, size));
+        model.addAttribute("listPatients", pagePatients.getContent());
+        model.addAttribute("pages", new int[pagePatients.getTotalPages()]);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("keyword", keyword);
         return "patients";
     }
 
     @GetMapping("/delete")
-    public String delete(Long id, String keyword, int page){
+    public String delete(Long id, String keyword, int page) {
         patientRepository.deleteById(id);
-        return "redirect:/index?page="+page+"&keyword="+keyword;
+        return "redirect:/index?page=" + page + "&keyword=" + keyword;
     }
 
     @GetMapping("/")
-    public String home(){
+    public String home() {
         return "redirect:/index";
     }
 
     @GetMapping("/patients")
     @ResponseBody
-    public List<Patient> listPatients(){
+    public List<Patient> listPatients() {
         return patientRepository.findAll();
     }
 
     @GetMapping("/formPatient")
-    public String form(Model model){
-        model.addAttribute("patient",new Patient());
+    public String form(Model model) {
+        model.addAttribute("patient", new Patient());
         return "FormPatient";
     }
 
-    @PostMapping ("/save")
-    public String save(Model model,@Valid Patient patient, BindingResult bindingResult){
+    @PostMapping("/save")
+    public String save(Model model, @Valid Patient patient, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "FormPatient";
         patientRepository.save(patient);
@@ -68,11 +69,10 @@ public class PatientController {
     }
 
 
-
     @GetMapping("/patient")
-    public String patient(Model model, Long id){
+    public String patient(Model model, Long id) {
         Patient patient = patientRepository.findById(id).get();
-        model.addAttribute("patient",patient);
+        model.addAttribute("patient", patient);
         return "Patient";
     }
 }

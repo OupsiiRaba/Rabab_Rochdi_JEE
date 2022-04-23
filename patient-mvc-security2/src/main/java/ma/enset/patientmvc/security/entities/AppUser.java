@@ -10,7 +10,9 @@ import java.util.List;
 
 
 @Entity
-@Data @NoArgsConstructor @AllArgsConstructor
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AppUser {
     @Id
     private String userId;

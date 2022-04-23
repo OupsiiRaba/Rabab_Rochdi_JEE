@@ -26,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         /* la stratégie comment spring sec va chercher les users*/
@@ -57,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //je demande à spring sec une formulaire d'auth
         /*pour une formulaire personnalisée
-        *http.formLogin().loginPage("/login"); */
+         *http.formLogin().loginPage("/login"); */
         //http.formLogin().loginPage("/auth");
         http.formLogin();
         //ne nécessite pas une auth

@@ -2,9 +2,10 @@ package framework;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
- @XmlRootElement(name = "bean")
+
+@XmlRootElement(name = "bean")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Bean implements Serializable{
+public class Bean implements Serializable {
     @XmlAttribute
     private String id;
     @XmlAttribute

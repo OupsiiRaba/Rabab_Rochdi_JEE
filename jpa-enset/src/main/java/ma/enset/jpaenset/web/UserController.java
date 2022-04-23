@@ -13,13 +13,15 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+
     @GetMapping("/users/{username}")
-    public User user(@PathVariable String username){
+    public User user(@PathVariable String username) {
         User user = userService.findUserByUserName(username);
         return user;
     }
+
     @GetMapping("/users")
-    public List<User> users(){
+    public List<User> users() {
         List<User> users = userService.getAllUsers();
         return users;
     }
